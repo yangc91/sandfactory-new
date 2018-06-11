@@ -31,12 +31,13 @@ public class ChengZhongServiceImpl implements IChengZhongService {
 
     if(StringUtils.isNotBlank(startTime)) {
       //cri.where().and("pzsj", ">=", DateTimeUtil.dateTimeStrToLong(startTime + " 00:00:00"));
-      cri.where().and("pzsj", ">=", startTime + " 00:00:00");
+      // 更新时间
+      cri.where().and("gxsj", ">=", startTime + " 00:00:00");
     }
 
     if (StringUtils.isNotBlank(endTime)) {
       //cri.where().and("pzsj", "<", DateTimeUtil.dateTimeStrToLong(endTime + " 23:59:59"));
-      cri.where().and("pzsj", "<", endTime + " 23:59:59");
+      cri.where().and("gxsj", "<", endTime + " 23:59:59");
     }
 
     // 序号
@@ -85,7 +86,55 @@ public class ChengZhongServiceImpl implements IChengZhongService {
     return nutDao.fetch(ChengZhongRecord.class, id);
   }
 
-  @Override public boolean add(ChengZhongRecord record) {
+  @Override
+  public boolean add(ChengZhongRecord record) {
+    nutDao.insert(record);
     return true;
+  }
+
+  @Override
+  public Integer countRecordNo(String startTime, String endTime) {
+    Criteria cri = Cnd.cri();
+
+    if(StringUtils.isNotBlank(startTime)) {
+      // 更新时间
+      cri.where().and("gxsj", ">=", startTime);
+    }
+
+    if (StringUtils.isNotBlank(endTime)) {
+      cri.where().and("gxsj", "<", endTime );
+    }
+
+    int count = nutDao.count(ChengZhongRecord.class, cri);
+
+    return count;
+  }
+
+  @Override
+  public Float countRecordWeight(String startTime, String endTime) {
+
+    float weight = 0f;
+    Criteria cri = Cnd.cri();
+
+    if(StringUtils.isNotBlank(startTime)) {
+      // 更新时间
+      cri.where().and("gxsj", ">=", startTime);
+    }
+
+    if (StringUtils.isNotBlank(endTime)) {
+      cri.where().and("gxsj", "<", endTime);
+    }
+
+    List<ChengZhongRecord> list = nutDao.query(ChengZhongRecord.class, cri);
+
+    if (list.isEmpty()) {
+      return weight;
+    }
+
+    for (ChengZhongRecord record : list) {
+      weight += record.getSz();
+    }
+
+    return weight;
   }
 }

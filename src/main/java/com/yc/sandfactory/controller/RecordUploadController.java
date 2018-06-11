@@ -43,8 +43,8 @@ public class RecordUploadController {
       result.put("success", true);
     } catch (Exception e) {
       logger.error("称重记录上报入库失败", e.getMessage());
+      result.put("msg", "称重记录上报入库失败");
     }
     return result;
   }
-
 }

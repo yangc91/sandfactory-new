@@ -121,37 +121,25 @@ $(document).ready(function () {
     layer.closeAll('page');
 
     setTimeout(function () {
-      // $.ajax({
-      //   type: 'GET',
-      //   url: "/rias/web/auth/index",
-      //   success: function (res) {
-      //     var res = JSON.parse(res);
-      //     $("#appTotal").html(res.appTotal + "个");
-      //     $("#appCallInterfaceTotal").html(res.appCallInterfaceTotal + "次");
-      //     option.series[0].data = [];
-      //     if (res.monthList) {
-      //       for (var i = 0; i < res.monthList.length; i++) {
-      //         option.xAxis[0].data.push(res.monthList[i]['month'].substr(2, 8));
-      //         option.series[0].data.push(res.monthList[i].count);
-      //       }
-      //     }
-      //     chart.setOption(option);
-      //   }
-      // });
-
-      var json = '{"appCallInterfaceTotal":20,"appTotal":10,"monthList":[{"month":"2018-06","count":1},{"month":"2018-05","count":2},{"month":"2018-04","count":3},{"month":"2018-03","count":4},{"month":"2018-02","count":5},{"month":"2018-01","count":6},{"month":"2017-12","count":7},{"month":"2017-11","count":8},{"month":"2017-10","count":9},{"month":"2017-09","count":10},{"month":"2017-08","count":11},{"month":"2017-07","count":12}],"success":"true"}';
-      var res = JSON.parse(json);
-      $("#appTotal").html(res.appTotal + "量");
-      $("#appCallInterfaceTotal").html(res.appCallInterfaceTotal + "KG");
-      option.series[0].data = [];
-      if (res.monthList) {
-        for (var i = 0; i < res.monthList.length; i++) {
-          option.xAxis[0].data.push(res.monthList[i]['month'].substr(2, 8));
-          option.series[0].data.push(res.monthList[i].count);
+      $.ajax({
+        type: 'GET', url: "/admin/record/count", success: function (res) {
+          if (res.flag == 1) {
+            var result = res.result;
+            $("#appTotal").html(result.todayNo + "量");
+            $("#appCallInterfaceTotal").html(result.todayWeight + "KG");
+            option.series[0].data = [];
+            if (result.monthList) {
+              for (var i = 0; i < result.monthList.length; i++) {
+                option.xAxis[0].data.push(result.monthList[i]['month'].substr(2, 8));
+                option.series[0].data.push(result.monthList[i].weight);
+              }
+            }
+            chart.setOption(option);
+          } else {
+            layer.alert(res.msg)
+          }
         }
-      }
-      chart.setOption(option);
-
+      });
     }, 1);
 
   });

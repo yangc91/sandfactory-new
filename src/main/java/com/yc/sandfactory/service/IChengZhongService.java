@@ -22,4 +22,20 @@ public interface IChengZhongService {
 
   boolean add(ChengZhongRecord record);
 
+  /**
+   * 统计一段时间内的称重数量
+   * @param startTime
+   * @param endTime
+   * @return
+   */
+  Integer countRecordNo(String startTime, String endTime);
+
+  /**
+   * 统计一段时间内的总重量（实重）
+   * @param startTime
+   * @param endTime
+   * @return
+   */
+  Float countRecordWeight(String startTime, String endTime);
+
 }
