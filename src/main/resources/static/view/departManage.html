@@ -1,0 +1,102 @@
+<style>
+    .layui-btn{
+        height:32px;line-height:32px;
+    }
+    #editDeptForm{
+        position: relative;
+    }
+    #editShadow{
+        height: 36px;
+        width:264px;
+        margin-left: 18px;
+        background:#ccc;
+        opacity: 0.5;
+        filter:Alpha(opacity=50);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+<div class="departContent" class="overflow-hidden">
+    <div id="departLeft" class="float-left" style="width:50%">
+        <div class="deptLeftTop">
+            <span style="line-height:32px;display:inline-block;">部门管理</span>
+            <button type="button" class="layui-btn ml10" id="addParent">添加新部门</button>
+        </div>
+        <div class="deptTree">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+    </div>
+    <div id="departRight" class="float-left">
+        <div id="editDept" style="width:400px;">
+            <div class="editDeptTitle">
+                <span style="line-height:32px;display:inline-block;">编辑部门</span>
+            </div>
+            <div class="editDeptBox">
+                <form action="" class="layui-form mt20 pr20 mr20" id="editDeptForm" name="editDeptForm">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label text-left"><span class="text-warn">*</span> 部门名称:</label>
+                        <div class="layui-block">
+                            <input type="text" name="editDeptName" id="editDeptName" maxlength="32" placeholder="请输入部门名称" class="layui-input ml20">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label text-left"><span class="text-warn">*</span> 同级排序:</label>
+                        <div class="layui-block">
+                            <input type="number" name="editDeptNum" id="editDeptNum" maxlength="32" placeholder="同级部门间的排序" class="layui-input ml20" autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item" style="margin-bottom:0">
+                        <div class="layui-input-block ml20">
+                            <button type="button" class="layui-btn layui-btn-disabled" id="editSave">保存</button>
+                            <button type="button" class="layui-btn layui-btn-disabled" id="addLeaf">添加子部门</button>
+                            <button type="button" class="layui-btn layui-btn-disabled" id="remove">删除</button>
+                        </div>
+                    </div>
+                    <!-- <div class="layui-form-item" style="margin-bottom:0"  id="editShadow">
+                        
+                    </div> -->
+                   
+                </form>
+            </div>
+        </div>
+        <div id="addDept" style="width:400px;display:none">
+            <div class="addDeptTitle">
+                <span style="line-height:32px;display:inline-block;">添加部门</span>
+            </div>
+            <div class="addDeptBox">
+                <form action="" class="layui-form mt20 pr20 mr20" id="addDeptForm" name="addDeptForm">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label text-left"><span class="text-warn">*</span> 上级部门:</label>
+                        <div class="layui-input-block">
+                            <span style="line-height:38px;">无</span>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label text-left"><span class="text-warn">*</span> 部门名称:</label>
+                        <div class="layui-block">
+                            <input type="text" name="addDeptName" id="addDeptName" maxlength="32" placeholder="请输入部门名称" class="layui-input ml20" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label text-left"><span class="text-warn">*</span> 同级排序:</label>
+                        <div class="layui-block">
+                            <input type="number" name="addDeptNum" id="addDeptNum" maxlength="32" placeholder="同级部门间的排序" class="layui-input ml20" autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item" style="margin-bottom:0">
+                        <div class="layui-block ml20">
+                            <button type="button" class="layui-btn" id="saveInfo">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary" id="add-cancel">取消</button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>

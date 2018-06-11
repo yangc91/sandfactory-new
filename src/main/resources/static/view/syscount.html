@@ -1,0 +1,84 @@
+  <style>
+
+    .index {
+      padding-top: 26px;
+    }
+
+    .index .count {
+      overflow: hidden;
+    }
+
+    .index .count > div {
+      width: 450px;
+      height: 130px;
+      box-sizing: border-box;
+      border: 1px solid #dcdcdc;
+      padding-left: 210px;
+      float: left;
+      margin-right: 50px;
+    }
+
+    .index .count label {
+      color: #999;
+      font-size: 16px;
+    }
+
+    .index .count p {
+      font-size: 30px;
+      font-weight: bold;
+      color: #727e86;
+      line-height: 1;
+      margin-top: 12px;
+    }
+
+    .index .count .sqs {
+      padding-top: 35px;
+      background: url("../img/img_yysqs.png") no-repeat;
+    }
+
+    .index .count .jksy {
+      padding-top: 35px;
+      background: url("../img/img_rzjk.png") no-repeat;
+    }
+
+    .index .chart {
+      margin-top: 40px;
+      border: 1px solid #dcdcdc;
+    }
+
+    .index .chart h2 {
+      line-height: 40px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #333;
+      text-indent: 18px;
+      background: #f2f2f2;
+    }
+
+    .index .chart #eChart {
+      height: 350px;
+    }
+  </style>
+  <header class="title">
+    <h1>今日统计</h1>
+  </header>
+  <div class="index content">
+    <section class="count">
+      <div class="sqs">
+        <label>今日总车数</label>
+        <p id="appTotal">0量</p>
+      </div>
+      <div class="jksy">
+        <label>今日称重</label>
+        <p id="appCallInterfaceTotal">0KG</p>
+      </div>
+    </section>
+    <!--<section class="quick-menu">-->
+      <!--<a href="#authManage" class="layui-btn">新建应用授权</a>-->
+      <!--<a href="#authCount" class="layui-btn">接口使用统计</a>-->
+    <!--</section>-->
+    <section class="chart">
+      <h2>近一年称重统计</h2>
+      <div id="eChart"></div>
+    </section>
+  </div>

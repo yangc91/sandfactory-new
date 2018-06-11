@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>后台管理系统</title>
+  <link href="js/lib/layui/css/layui.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+<body class="login-wrap">
+<form class="layui-form login-form">
+  <div class="layui-form-item">
+    <input type="text" name="username" lay-verify="username" placeholder="请输入用户名" autocomplete="off"
+           class="layui-input" id="username">
+  </div>
+  <div class="layui-form-item">
+    <input type="password" name="password" maxlength="12" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input" id="password">
+  </div>
+  <div class="layui-form-item">
+    <button class="layui-btn" type="button" lay-filter="login" id="login">登录</button>
+  </div>
+</form>
+
+<script src="js/lib/jquery.min.js"></script>
+<script src="js/lib/layui/layui.js"></script>
+<script src="js/lib/jquery.placeholder.js"></script>
+<script src="js/controller/login.js"></script>
+</body>
+</html>

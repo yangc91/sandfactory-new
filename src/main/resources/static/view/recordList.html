@@ -1,0 +1,116 @@
+<form class="layui-form fr" name="searchForm">
+        <div class="layui-inline key-item">
+            <input type="text" name="xh" id="xh" placeholder="输入票据编号" class="layui-input">
+        </div>
+        <div class="layui-inline key-item">
+            <input type="text" name="ch" id="ch" placeholder="输入车辆号码" class="layui-input">
+        </div>
+        <div class="layui-inline key-item">
+            <input type="text" name="sh" id="sh" placeholder="输入收货单位" class="layui-input">
+        </div>
+        <div class="layui-inline key-item">
+            <input type="text" name="fh" id="fh" placeholder="输入供货单位" class="layui-input">
+        </div>
+
+        <div class="layui-inline key-item">
+            <input type="text" class="layui-input" id="startTime" placeholder="开始时间">
+        </div>
+
+        <div class="layui-inline key-item">
+            <input type="text" class="layui-input" id="endTime" placeholder="结束时间">
+        </div>
+
+        <div class="layui-inline key-item">
+            <label class="layui-form-label">出入类型:</label>
+        </div>
+        <div class="layui-inline key-item">
+            <select name="crlx" id="crlx">
+                <option value="">全部</option>
+                <option value="出厂">出厂</option>
+                <option value="进厂">进厂</option>
+            </select>
+        </div>
+
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-primary" type="button" id="searchBtn">搜索</button>
+        </div>
+
+</form>
+<div class="data-list">
+    <div class="layui-btn-group mt10 batchBar">
+        <!--<button class="layui-btn" type="button" data-type="addPer">添加用户</button>-->
+    </div>
+    <!--表格模板引擎-->
+    <div id="searchDataView" class="table-view">
+    </div>
+
+    <script id="searchModule" type="text/html">
+        <table class="layui-table layui-form table-auto2" lay-even lay-skin="line">
+            <thead>
+            <tr>
+                <th width="50" style="min-width: 50px;">序号</th>
+                <!--<th width="100" style="min-width: 100px;">用户名</th>-->
+                <!--<th width="50" style="min-width: 50px;">登录IP</th>-->
+                <!--<th width="80" style="min-width: 80px;">日志类型</th>-->
+                <!--<th width="80" style="min-width: 80px;">日志时间</th>-->
+                <!--<th width="150" style="min-width: 150px;">日志内容</th>-->
+
+                <th>沙场</th>
+                <th>站点</th>
+                <th>地磅</th>
+                <th>票据编号</th>
+                <th>车辆号码</th>
+                <th>出入类型</th>
+                <th>货物名称</th>
+                <th>收货单位</th>
+                <th>毛重</th>
+                <th>皮重</th>
+                <th>净重</th>
+                <th>供货单位</th>
+                <th>司机</th>
+                <th>日期</th>
+                <th>时间</th>
+                <!--<th>操作</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            {{# layui.each(d,function(index,item){ }}
+            <tr data-index={{index}}>
+                <td>
+                    {{index + 1}}
+                </td>
+                <td>{{item.sandName}}</td>
+                <td>{{item.workName}}</td>
+                <td>{{item.truckName}}</td>
+                <td>{{item.xh}}</td>
+                <td>{{item.ch}}</td>
+                <td>{{item.crlx}}</td>
+                <td>{{item.hm}}</td>
+                <td>{{item.sh}}</td>
+                <td>{{item.mz}}</td>
+                <td>{{item.pz}}</td>
+                <td>{{item.jz}}</td>
+                <td>{{item.fh}}</td>
+                <td>{{item.siji}}</td>
+                <td>{{item.rq}}</td>
+                <td>{{item.shijian}}</td>
+
+            </tr>
+            {{# }); }}
+            {{# if(d.length <= 0){ }}
+            <tr class='empty_tr'>
+                <td colspan='8'>
+                    <span class='iconfont icon-shuju'></span> 暂无数据!
+                </td>
+            </tr>
+            {{# } }}
+            </tbody>
+        </table>
+
+    </script>
+    <div class="pager-container">
+        <div id="pager" class="pager"></div>
+    </div>
+
+</div>
+

@@ -1,0 +1,179 @@
+/**
+ * Created by lhr on 2017/10/12.
+ * 各个页面的样式
+ */
+/*登录页面样式*/
+.login-wrap{
+  background: url("../img/bg.png") no-repeat center;
+}
+.login-wrap .login-form{
+  width: 360px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -180px;
+  box-sizing: border-box;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background: #fff url("../img/logo.png")  no-repeat center 30px;
+  padding-top: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.login-wrap .login-form:before{
+  content: "后台管理系统登录";
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 30px;
+}
+.login-wrap .layui-form-item{
+  padding: 0 25px;
+}
+.login-wrap .layui-btn{
+  width: 100%;
+}
+.layui-layout-admin .layui-logo img{
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+/*首页样式*/
+.layui-side .layui-nav .layui-nav-item .layui-nav-child a{
+  padding: 0 10px 0 30px;
+}
+.layui-layout-admin .layui-body{
+  top: 80px;
+  right: 0;
+  bottom: 20px;
+  left: 220px;
+  padding: 20px;
+  background: #fff;
+}
+.layui-layout-admin .layui-logo a{
+  color: #fff;
+}
+.layui-layout-admin .layui-logo a:hover{
+  opacity: .9;
+  filter: alpha(opacity=90)
+}
+/*公用组件样式*/
+.title-header{
+  background: #e8efed;
+  padding: 8px 10px;
+  color: #489a93;
+}
+.search-body{
+  padding-top: 20px;
+}
+td .layui-form-switch{
+  margin-top: 0;
+  box-sizing: content-box;
+}
+.search-body .layui-form-item{
+  margin-bottom: 10px;
+}
+.search-body .layui-form-item .layui-inline{
+  margin-bottom: 10px;
+}
+.error-item{
+  position: relative;
+}
+.error-item input.error{
+  border: 1px solid #ff4a54;
+}
+.error-item label.error{
+  position: absolute;
+  bottom: -15px;
+  font-size: 12px;
+  color: #ff4a54;
+  z-index: 1;
+}
+.layui-layout-admin{
+  height: 100%;
+}
+.layui-layout-admin .layui-body{
+  margin-left: 220px;
+  position: static;
+  height: 100%;
+  padding: 0;
+  margin-top: -60px;
+  overflow: auto;
+  box-sizing: border-box;
+  border-top: 80px solid #f1f3f2;
+  border-bottom: 20px solid #f1f3f2;
+}
+.layui-layout-admin .layui-body #ui-view{
+  padding: 20px;
+}
+
+/*自定义行高可以自适应的表格*/
+.table-auto+.layui-table-view .layui-table-cell{
+  overflow: visible;
+  min-height: 28px;
+  height: auto;
+  display: inline-block;
+  white-space: pre-wrap;
+}
+.table-auto+.layui-table-view .layui-table td{
+  vertical-align: middle;
+}
+/*自定义行高列宽*/
+.table-auto2 td,.table-auto2 th{
+  vertical-align: middle;
+}
+.table-view{
+  overflow: auto;
+}
+/*文件上传*/
+.layui-upload-img{
+  width: 92px;
+  height: 92px;
+}
+/* 弹窗 表格操作列 树 */
+.wsk_log{
+  overflow: hidden;
+  width: 100%;
+  margin-top:10px;
+}
+.wsk_popTreeLi{
+  display: inline-block;
+  line-height: 24px;
+  padding:0 5px;
+  background: #31b0d5;
+  color:#ffffff;
+  margin-left:5px; 
+  margin-top:8px;
+}
+.cursorP{
+  cursor: pointer;
+  
+} 
+.layui-layer-page .layui-btn{
+  height: 32px;
+  line-height: 32px;
+  padding:0 30px;
+}
+.layui-layer-btn a.layui-layer-btn0{
+  background-color: #009688;
+  border-color: #009688;
+}
+.layui-layer-btn.layui-layer-btn-c{
+  padding-bottom:22px;
+}
+.layui-layer-btn.layui-layer-btn-c a{
+  height: 30px;
+  line-height: 30px;
+  padding:0 26px;
+}
+.cursorP{
+  cursor: pointer;
+  
+} 
+/*重置树的样式*/
+.ztree li span.button.switch {
+  width: 20px;
+  height: 23px;
+}

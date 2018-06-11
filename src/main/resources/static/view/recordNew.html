@@ -1,0 +1,72 @@
+<div class="data-list">
+    <div class="layui-btn-group mt10 batchBar">
+        <!--<button class="layui-btn" type="button" data-type="addPer">添加用户</button>-->
+    </div>
+    <!--表格模板引擎-->
+    <div id="searchDataView" class="table-view">
+    </div>
+
+    <script id="searchModule" type="text/html">
+        <table class="layui-table layui-form table-auto2" lay-even lay-skin="line">
+            <thead>
+            <tr>
+                <th width="50" style="min-width: 50px;">序号</th>
+                <th>沙场</th>
+                <th>站点</th>
+                <th>地磅</th>
+                <th>票据编号</th>
+                <th>车辆号码</th>
+                <th>出入类型</th>
+                <th>货物名称</th>
+                <th>收货单位</th>
+                <th>毛重</th>
+                <th>皮重</th>
+                <th>净重</th>
+                <th>供货单位</th>
+                <th>司机</th>
+                <th>日期</th>
+                <th>时间</th>
+                <!--<th>操作</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            {{# layui.each(d,function(index,item){ }}
+            <tr data-index={{index}}>
+                <td>
+                    {{index + 1}}
+                </td>
+                <td>{{item.sandName}}</td>
+                <td>{{item.workName}}</td>
+                <td>{{item.truckName}}</td>
+                <td>{{item.xh}}</td>
+                <td>{{item.ch}}</td>
+                <td>{{item.crlx}}</td>
+                <td>{{item.hm}}</td>
+                <td>{{item.sh}}</td>
+                <td>{{item.mz}}</td>
+                <td>{{item.pz}}</td>
+                <td>{{item.jz}}</td>
+                <td>{{item.fh}}</td>
+                <td>{{item.siji}}</td>
+                <td>{{item.rq}}</td>
+                <td>{{item.shijian}}</td>
+
+            </tr>
+            {{# }); }}
+            {{# if(d.length <= 0){ }}
+            <tr class='empty_tr'>
+                <td colspan='8'>
+                    <span class='iconfont icon-shuju'></span> 暂无数据!
+                </td>
+            </tr>
+            {{# } }}
+            </tbody>
+        </table>
+
+    </script>
+    <div class="pager-container">
+        <div id="pager" class="pager"></div>
+    </div>
+
+</div>
+

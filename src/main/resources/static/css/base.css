@@ -1,0 +1,253 @@
+/**
+ * Created by lhr on 2017/10/12.
+ * 包含重置样式和框架基础样式
+ */
+/*
+	HTML5 Reset :: style.css
+	----------------------------------------------------------
+	We have learned much from/been inspired by/taken code where offered from:
+	Eric Meyer					:: http://meyerweb.com
+	HTML5 Doctor				:: http://html5doctor.com
+	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+-------------------------------------------------------------------------------*/
+
+/* Let's default this puppy out
+-------------------------------------------------------------------------------*/
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+main, article, aside, figure, footer, header, nav, section, details, summary {display: block;}
+
+/* Handle box-sizing while better addressing child elements:
+   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+  /*box-sizing: border-box;*/
+}
+
+/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
+
+/* Responsive images and other embedded objects */
+/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */
+img,
+object,
+embed {max-width: 100%;}
+
+/*
+   Note: keeping IMG here will cause problems if you're using foreground images as sprites.
+	In fact, it *will* cause problems with Google Maps' controls at small size.
+	If this is the case for you, try uncommenting the following:
+#map img {
+		max-width: none;
+}
+*/
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {overflow-y: auto;}
+
+/* we use a lot of ULs that aren't bulleted.
+	you'll have to restore the bullets within content,
+	which is fine because they're probably customized anyway */
+ul {list-style: none;}
+
+blockquote, q {quotes: none;}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {content: ''; content: none;}
+
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+
+del {text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;}
+
+/* tables still need cellspacing="0" in the markup */
+/*table {border-collapse: separate; border-spacing: 0;}*/
+/*th {font-weight: bold; vertical-align: bottom;}*/
+/*td {font-weight: normal; vertical-align: top;}*/
+
+
+input, select {vertical-align: middle;}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom;}
+.ie7 input[type="checkbox"] {vertical-align: baseline;}
+.ie6 input {vertical-align: text-bottom;}
+
+select, input, textarea {font: 99% sans-serif;}
+
+table {font-size: inherit; font: 100%;}
+
+small {font-size: 85%;}
+
+strong {font-weight: bold;}
+
+td, td img {vertical-align: top;}
+
+/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+/* hand cursor on clickable elements */
+.clickable,
+label,
+input[type=button],
+input[type=submit],
+input[type=file],
+button {cursor: pointer;}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {margin: 0;}
+
+/* make buttons play nice in IE */
+button,
+input[type=button] {width: auto; overflow: visible;}
+
+/* scale images in IE7 more attractively */
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+/* prevent BG image flicker upon hover
+   (commented out as usage is rare, and the filter syntax messes with some pre-processors)
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+*/
+
+/* let's clear some floats */
+.clearfix:after { content: " "; display: block; clear: both; }
+
+/* 其余项目中经常用到的样式
+-------------------------------------------------------------------------------*/
+/*chrome浏览器记住密码后黄色背景*/
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+/*placeholder颜色一致*/
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+:-moz-placeholder {
+  color: #999;
+}
+
+::-moz-placeholder {
+  color: #999;
+}
+
+input:-ms-input-placeholder {
+  color: #999 !important;
+  text-overflow: ellipsis;
+}
+
+/*IE系列默认的查看密码眼睛去掉*/
+::-ms-clear, ::-ms-reveal {
+  display: none;
+}
+
+/*IE11下两端对齐不起作用的问题*/
+.text-justify{text-justify: inter-ideograph}
+
+/*去掉ie8 a的虚线框*/
+a:focus{
+  outline: none 0;
+}
+html{
+  height: 100%;
+}
+body{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: '微软雅黑';
+  font-size: 14px;
+  background: #f1f3f2;
+}
+.mt20{margin-top: 20px !important;}
+.mt40{margin-top: 40px !important;}
+.mt15{margin-top: 15px !important;}
+.mt10{margin-top: 10px !important;}
+.mt5{margin-top: 5px !important;}
+.mt0{margin-top: 0 !important;}
+.mb40{margin-bottom: 20px !important;}
+.mb20{margin-bottom: 20px !important;}
+.mb15{margin-bottom: 15px !important;}
+.mb10{margin-bottom: 10px !important;}
+.mb5{margin-bottom: 5px !important;}
+.mb0{margin-bottom: 0 !important;}
+.mr20{margin-right: 20px !important;}
+.mr15{margin-right: 15px !important;}
+.mr10{margin-right: 10px !important;}
+.mr5{margin-right: 5px !important;}
+.mr0{margin-right: 0 !important;}
+.ml20{margin-left: 20px !important;}
+.ml15{margin-left: 15px !important;}
+.ml10{margin-left: 10px !important;}
+.ml5{margin-left: 5px !important;}
+.ml0{margin-left: 0 !important;}
+.m0{margin: 0 !important;}
+.m5{margin: 5px !important;}
+.m10{margin: 10px !important;}
+.m15{margin: 15px !important;}
+.m20{margin: 20px !important;}
+.pt20{padding-top: 20px !important;}
+.pt15{padding-top: 15px !important;}
+.pt10{padding-top: 10px !important;}
+.pt5{padding-top: 5px !important;}
+.pt0{padding-top: 0 !important;}
+.pb20{padding-bottom: 20px !important;}
+.pb15{padding-bottom: 15px !important;}
+.pb10{padding-bottom: 10px !important;}
+.pb5{padding-bottom: 5px !important;}
+.pb0{padding-bottom: 0 !important;}
+.pr20{padding-right: 20px !important;}
+.pr15{padding-right: 15px !important;}
+.pr10{padding-right: 10px !important;}
+.pr5{padding-right: 5px !important;}
+.pr0{padding-right: 0 !important;}
+.pl20{padding-left: 20px !important;}
+.pl15{padding-left: 15px !important;}
+.pl10{padding-left: 10px !important;}
+.pl5{padding-left: 5px !important;}
+.pl0{padding-left: 0 !important;}
+.p0{padding: 0 !important;}
+.p5{padding: 5px !important;}
+.p10{padding: 10px !important;}
+.p15{padding: 15px !important;}
+.p20{padding: 20px !important;}
+.text-warn{
+  color: #ff4a54;
+}
+.text-comment{
+  color: #666;
+}
+.text-center{
+  text-align: center!important;
+}
+.text-left{
+  text-align: left!important;
+}
+.text-right{
+  text-align: right!important;
+}
+.float-left{
+  float: left!important;
+}
+.float-right{
+  float: right!important;
+}
+.overflow-hidden{
+  overflow: hidden!important;
+}

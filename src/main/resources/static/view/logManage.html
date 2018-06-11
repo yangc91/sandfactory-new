@@ -1,0 +1,109 @@
+<form class="layui-form fr" name="searchForm">
+    <!--<div class="form-group">-->
+    <!--<input type="text" class="form-control input-sm" id="startTime1" name="startTime"-->
+    <!--placeholder="开始时间">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+    <!--<input type="text" class="form-control input-sm" id="endTime1" name="endTime"-->
+    <!--placeholder="结束时间">-->
+    <!--</div>-->
+
+    <div class="layui-inline key-item">
+        <input type="text" class="layui-input" id="startTime" placeholder="开始时间">
+    </div>
+
+    <div class="layui-inline key-item">
+        <input type="text" class="layui-input" id="endTime" placeholder="结束时间">
+    </div>
+
+    <div class="layui-inline key-item">
+        <label class="layui-form-label">类型:</label>
+    </div>
+    <div class="layui-inline key-item">
+        <select name="action" id="action">
+            <option value="">全部</option>
+            <option value="1">登录</option>
+            <option value="2">退出</option>
+            <option value="3">人员管理</option>
+            <option value="4">角色管理</option>
+            <option value="5">监控管理</option>
+        </select>
+    </div>
+
+    <div class="layui-inline key-item">
+        <input type="text" name="searchKey" id="searchKey" placeholder="输入关键字" class="layui-input">
+    </div>
+
+    <div class="layui-inline">
+        <button class="layui-btn layui-btn-primary" type="button" id="searchBtn">搜索</button>
+    </div>
+
+</form>
+<div class="data-list">
+    <div class="layui-btn-group mt10 batchBar">
+        <!--<button class="layui-btn" type="button" data-type="addPer">添加用户</button>-->
+    </div>
+    <!--表格模板引擎-->
+    <div id="searchDataView" class="table-view">
+    </div>
+
+    <script id="searchModule" type="text/html">
+        <table class="layui-table layui-form table-auto2" lay-even lay-skin="line">
+            <thead>
+            <tr>
+                <th width="50" style="min-width: 50px;">序号</th>
+                <th width="100" style="min-width: 100px;">用户名</th>
+                <th width="50" style="min-width: 50px;">登录IP</th>
+                <th width="80" style="min-width: 80px;">日志类型</th>
+                <th width="80" style="min-width: 80px;">日志时间</th>
+                <th width="150" style="min-width: 150px;">日志内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{# layui.each(d,function(index,item){ }}
+            <tr data-index={{index}}>
+
+                <td>
+                    {{index + 1}}
+                </td>
+                <td>{{item.managerName}}</td>
+                <td>{{item.managerIp}}</td>
+                <td>
+                    {{# if(item.action == "1"){ }}
+                        登录日志
+                    {{# } else if(item.action == "2"){ }}
+                        退出日志
+                    {{# } else if(item.action == "3"){ }}
+                        人员管理
+                    {{# } else if(item.action == "4"){ }}
+                        角色管理
+                    {{# } else if(item.action == "5"){ }}
+                        监控管理
+                    {{# } else { }}
+                        --
+                    {{# } }}
+
+                </td>
+                <td>{{ (new Date(item.time)).format("yyyy-MM-dd")  }}</td>
+                <td>{{item.content}}</td>
+            </tr>
+            {{# }); }}
+            {{# if(d.length <= 0){ }}
+            <tr class='empty_tr'>
+                <td colspan='8'>
+                    <span class='iconfont icon-shuju'></span> 暂无数据!
+                </td>
+            </tr>
+            {{# } }}
+            </tbody>
+        </table>
+
+    </script>
+    <div class="pager-container">
+        <div id="pager" class="pager"></div>
+    </div>
+
+</div>
+      
+    

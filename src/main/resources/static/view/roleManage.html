@@ -1,0 +1,109 @@
+
+  
+<div class="data-list">
+    <div class="layui-btn-group mt10 batchBar">
+      <button class="layui-btn" type="button" data-type="addPer">添加角色</button>
+    </div>
+    <!--表格模板引擎-->
+    <div id="searchDataView" class="table-view">
+    </div>
+    <script id="searchModule" type="text/html">
+      <table class="layui-table layui-form table-auto2" lay-even lay-skin="line">
+        <thead>
+        <tr>
+          
+          <th width="50" style="min-width: 50px;">序号</th>
+          <th width="100" style="min-width: 100px;">角色名</th>
+          <th width="150" style="min-width: 150px;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{# layui.each(d,function(index,item){ }}
+        <tr>
+          
+          <td>
+            {{index + 1}}
+          </td>
+          <td>{{item.name}}</td>
+          
+          <td class="handle-td">
+            <a class="cursorP" data-type="edit" data-id="{{index}}">编辑</a>
+            <a class="cursorP ml10" data-type="del" data-id="{{index}}">删除</a>
+          </td>
+        </tr>
+        {{# }); }}
+        {{# if(d.length <= 0){ }}
+        <tr class='empty_tr'>
+          <td colspan='3'>
+            <span class='iconfont icon-shuju'></span> 暂无数据!
+          </td>
+        </tr>
+        {{# } }}
+        </tbody>
+      </table>
+  
+    </script>
+    <div class="pager-container">
+      <div id="pager" class="pager"></div>
+    </div>
+  
+</div>
+  <!--添加角色-->
+<section id="addPerson" style="display: none">
+    <form action="" class="layui-form mt20 pr20 mr20" id="addPerForm" name="addPerForm">
+      <div class="layui-form-item">
+        <label class="layui-form-label"><span class="text-warn">*</span> 角色名称:</label>
+        <div class="layui-input-block">
+          <input type="text" name="perName" id="perName" maxlength="32" placeholder="请输入角色名称" class="layui-input" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"><span class="text-warn">*</span> 模块:</label>
+        <div class="layui-input-block">
+            <ul id="addTree" class="ztree"></ul>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"><span class="text-warn">*</span> 权限:</label>
+        <div class="layui-input-block">
+            <ul id="addlog" class="wsk_log" style="height:auto;"></ul>
+        </div>
+      </div>
+      <div class="layui-form-item" style="margin-bottom:0">
+        <div class="layui-input-block">
+          <button class="layui-btn" type="button" id="addRoleBtn">确定</button>
+          <button type="button" class="layui-btn layui-btn-primary page-cancel">取消</button>
+        </div>
+      </div>
+    </form>
+</section>
+  <!--编辑角色-->
+<section id="editPerson" style="display: none">
+    <form action="" class="layui-form mt20 pr20 mr20" id="editPerForm" name="editPerForm">
+      <div class="layui-form-item">
+        <label class="layui-form-label"><span class="text-warn">*</span> 角色名称:</label>
+        <div class="layui-input-block">
+          <input type="text" name="editPerName" id="editPerName" maxlength="32" placeholder="请输入角色名称" class="layui-input" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"><span class="text-warn">*</span> 模块:</label>
+        <div class="layui-input-block">
+            <ul id="editTree" class="ztree"></ul>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"><span class="text-warn">*</span> 权限:</label>
+        <div class="layui-input-block">
+            <ul id="editlog" class="wsk_log" style="height:auto;"></ul>
+        </div>
+      </div>
+      <div class="layui-form-item" style="margin-bottom:0">
+        <div class="layui-input-block">
+          <button class="layui-btn" type="button" id="editRoleBtn">确定</button>
+          <button type="button" class="layui-btn layui-btn-primary page-cancel">取消</button>
+        </div>
+      </div>
+    </form>
+</section>
+  
