@@ -4,7 +4,7 @@
  */
 /*登录页面样式*/
 .login-wrap{
-  background: url("../img/bg.png") no-repeat center;
+  background: url("../img/bg1.png") no-repeat center;
 }
 .login-wrap .login-form{
   width: 360px;
@@ -14,7 +14,7 @@
   box-sizing: border-box;
   border: 1px solid #eee;
   border-radius: 5px;
-  background: #fff url("../img/logo.png")  no-repeat center 30px;
+  background: #fff url("../img/icon_admin1.png")  no-repeat center 30px;
   padding-top: 150px;
   position: absolute;
   top: 50%;

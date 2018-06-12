@@ -5,8 +5,11 @@ import com.yc.sandfactory.bean.ResponseBean;
 import com.yc.sandfactory.config.SysCons;
 import com.yc.sandfactory.entity.SysUser;
 import com.yc.sandfactory.service.ISysUserService;
+import com.yc.sandfactory.service.ISystemLogService;
 import com.yc.sandfactory.token.TokenFactory;
+import com.yc.sandfactory.util.Constants;
 import com.yc.sandfactory.util.DigestUtil;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +27,12 @@ public class LoginController extends BaseController {
 
 	@Autowired
 	private TokenFactory tokenFactory;
+
+	@Autowired
+	private ISystemLogService systemLogService;
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public ResponseBean login(@RequestBody JSONObject params) {
+	public ResponseBean login(@RequestBody JSONObject params, HttpServletRequest request) {
 		String username = params.getString("username");
 		String password = params.getString("password");
 		SysUser sysUser = userService.get(username, DigestUtil.MD5Digest(password, sysCons.getMd5Salt()));
@@ -36,6 +42,7 @@ public class LoginController extends BaseController {
 			sysUser.setPassword(null);
 
 			String token = tokenFactory.getOperator().add(sysUser);
+			systemLogService.addLog(sysUser, request.getRemoteAddr(), Constants.ENUM_LOG_TYPE.loginLog, "【"+username+"】登录成功");
 			return ResponseBean.createSuccess(token);
 		}
 		return ResponseBean.createError("用户名或密码错误");

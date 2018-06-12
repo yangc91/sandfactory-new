@@ -95,6 +95,7 @@ public class ChengZhongRecord implements Serializable {
   private float kz;
 
   //实重 kg
+  @Column("n_sz")
   private float sz;
 
   //扣率
