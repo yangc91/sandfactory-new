@@ -42,7 +42,10 @@ public class LoginController extends BaseController {
 			sysUser.setPassword(null);
 
 			String token = tokenFactory.getOperator().add(sysUser);
-			systemLogService.addLog(sysUser, request.getRemoteAddr(), Constants.ENUM_LOG_TYPE.loginLog, "【"+username+"】登录成功");
+
+			request.setAttribute("loginUser", sysUser);
+
+			systemLogService.addLog(Constants.ENUM_LOG_TYPE.loginLog, "【"+username+"】登录成功");
 			return ResponseBean.createSuccess(token);
 		}
 		return ResponseBean.createError("用户名或密码错误");

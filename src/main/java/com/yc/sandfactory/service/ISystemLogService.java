@@ -25,6 +25,6 @@ public interface ISystemLogService {
    * @param logType
    * @param content
    */
-  void addLog(SysUser user, String ip, Constants.ENUM_LOG_TYPE logType, String content);
+  void addLog(Constants.ENUM_LOG_TYPE logType, String content);
 
 }

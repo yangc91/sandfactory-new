@@ -103,12 +103,11 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public void resetPwd(Long userId, String password) {
-        SysUser sysUser = this.nutDao.fetch(SysUser.class, Cnd.where("id", "=", userId));
     }
 
     @Override
     public void delete(Long userId) {
-        SysUser sysUser = this.nutDao.fetch(SysUser.class, Cnd.where("id", "=", userId));
+        this.nutDao.delete(SysUser.class, userId);
     }
 
     @Override

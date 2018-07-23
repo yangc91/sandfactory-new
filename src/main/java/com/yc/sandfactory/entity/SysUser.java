@@ -96,6 +96,11 @@ public class SysUser {
      */
     private List<Long> roles;
 
+    /**
+    * 当前登录IP
+    */
+    private String curIp;
+
     public Long getId() {
         return id;
     }
@@ -227,5 +232,13 @@ public class SysUser {
         public String getInfo() {
             return info;
         }
+    }
+
+    public String getCurIp() {
+        return curIp;
+    }
+
+    public void setCurIp(String curIp) {
+        this.curIp = curIp;
     }
 }

@@ -110,6 +110,8 @@ public class ChengZhongController {
         monthLis.get(i).setMonth(bengin.substring(0, bengin.length() - 12));
       }
 
+      monthLis.remove(0);
+
       result.put("todayNo", todayNo);
       result.put("todayWeight", todayWeight);
       result.put("monthList", monthLis);

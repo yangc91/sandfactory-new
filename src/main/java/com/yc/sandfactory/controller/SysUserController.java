@@ -6,6 +6,8 @@ import com.yc.sandfactory.config.SysCons;
 import com.yc.sandfactory.entity.SysUser;
 import com.yc.sandfactory.service.ISysRoleService;
 import com.yc.sandfactory.service.ISysUserService;
+import com.yc.sandfactory.service.ISystemLogService;
+import com.yc.sandfactory.util.Constants;
 import com.yc.sandfactory.util.DigestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,9 @@ public class SysUserController extends BaseController {
     private ISysRoleService roleService;
 
     @Autowired
+    private ISystemLogService systemLogService;
+
+    @Autowired
     private SysCons sysCons;
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
@@ -47,6 +52,7 @@ public class SysUserController extends BaseController {
     public ResponseBean resetPwd(@PathVariable Long userId) {
         try {
             this.service.changePwd(userId, DigestUtil.MD5Digest(sysCons.getAdminDefaultPwd(), sysCons.getMd5Salt()));
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.userManagerLog, "重置【"+userId+"】密码成功");
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -58,6 +64,7 @@ public class SysUserController extends BaseController {
     public ResponseBean del(@PathVariable Long userId) {
         try {
             this.service.delete(userId);
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.userManagerLog, "删除【"+userId+"】成功");
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -69,6 +76,7 @@ public class SysUserController extends BaseController {
     public ResponseBean disable(@PathVariable Long userId) {
         try {
             this.service.disable(userId);
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.userManagerLog, "禁用【"+userId+"】成功");
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -80,6 +88,7 @@ public class SysUserController extends BaseController {
     public ResponseBean enable(@PathVariable Long userId) {
         try {
             this.service.enable(userId);
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.userManagerLog, "启用【"+userId+"】成功");
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -104,6 +113,7 @@ public class SysUserController extends BaseController {
         user.setPassword(DigestUtil.MD5Digest(sysCons.getAdminDefaultPwd(), sysCons.getMd5Salt()));
         user.setStatus(SysUser.Status.ENABLE.getValue());
         if(service.add(user)) {
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.userManagerLog, "添加【"+user.getUsername()+"】成功");
             return ResponseBean.SUCCESS;
         }
         return ResponseBean.createError("账户已经被使用，请更换");
@@ -124,6 +134,7 @@ public class SysUserController extends BaseController {
     public ResponseBean edit(@RequestBody SysUser user) {
         try {
             service.edit(user);
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.userManagerLog, "编辑【"+user.getUsername()+"】成功");
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

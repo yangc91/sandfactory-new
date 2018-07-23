@@ -66,8 +66,7 @@ public class VideoController extends BaseController {
     try {
       videoService.del(id);
       result.put("success", "true");
-      systemLogService.addLog(getLoginUser(request), request.getRemoteAddr(), Constants.ENUM_LOG_TYPE.videoManagerLog,
-          "删除监控【 " + id + "】成功");
+      systemLogService.addLog(Constants.ENUM_LOG_TYPE.videoManagerLog, "删除监控【 " + id + "】成功");
     } catch (Exception e) {
       logger.error("删除监控出错", e);
     }
@@ -83,8 +82,7 @@ public class VideoController extends BaseController {
     try {
       videoService.add(video);
       result.put("success", "true");
-      systemLogService.addLog(getLoginUser(request), request.getRemoteAddr(), Constants.ENUM_LOG_TYPE.videoManagerLog,
-          "添加监控【 " + video.getName() + "】成功");
+      systemLogService.addLog(Constants.ENUM_LOG_TYPE.videoManagerLog,"添加监控【 " + video.getName() + "】成功");
     } catch (Exception e) {
       logger.error("添加监控出错", e);
     }
@@ -103,8 +101,7 @@ public class VideoController extends BaseController {
     try {
       videoService.update(video);
       result.put("success", "true");
-      systemLogService.addLog(getLoginUser(request), request.getRemoteAddr(), Constants.ENUM_LOG_TYPE.videoManagerLog,
-          "修改监控【 " + video.getName() + "】成功");
+      systemLogService.addLog(Constants.ENUM_LOG_TYPE.videoManagerLog,"修改监控【 " + video.getName() + "】成功");
     } catch (Exception e) {
       logger.error("更新监控出错", e);
     }

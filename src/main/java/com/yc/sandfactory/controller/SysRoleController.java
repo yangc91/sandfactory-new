@@ -7,6 +7,8 @@ import com.yc.sandfactory.entity.SysFunc;
 import com.yc.sandfactory.entity.SysRole;
 import com.yc.sandfactory.service.ISysFuncService;
 import com.yc.sandfactory.service.ISysRoleService;
+import com.yc.sandfactory.service.ISystemLogService;
+import com.yc.sandfactory.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,9 @@ public class SysRoleController extends BaseController {
 
     @Autowired
     private ISysFuncService funcService;
+
+    @Autowired
+    private ISystemLogService systemLogService;
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ResponseBean list(int pageNum, int pageSize) {
@@ -57,6 +62,7 @@ public class SysRoleController extends BaseController {
             SysRole role = new SysRole();
             role.setName(roleBean.getName());
             this.service.add(role, roleBean.getFuncs());
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.roleManagerLog, "添加【"+roleBean.getName()+"】成功");
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -69,6 +75,7 @@ public class SysRoleController extends BaseController {
         try {
             if (id != null) {
                 this.service.del(id);
+                systemLogService.addLog(Constants.ENUM_LOG_TYPE.roleManagerLog, "删除【"+id+"】成功");
                 return ResponseBean.SUCCESS;
             }
         } catch (Exception e) {
@@ -97,6 +104,7 @@ public class SysRoleController extends BaseController {
             role.setId(roleBean.getId());
             role.setName(roleBean.getName());
             this.service.update(role, roleBean.getFuncs());
+            systemLogService.addLog(Constants.ENUM_LOG_TYPE.roleManagerLog, "编辑【"+roleBean.getName()+"】成功");
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
