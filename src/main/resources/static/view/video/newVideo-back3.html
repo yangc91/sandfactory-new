@@ -54,8 +54,9 @@
             } else {
                 isIntegrate = false;
             }
-            var host = location.host.split(":")[0];
-            var baseUrl = "http://localhost:10800";
+            //var host = location.host.split(":")[0];
+            var host = "112.35.23.101";
+            var baseUrl = "http://112.35.23.101:10800";
             var _url = baseUrl + "/api/v1";
             //var _url = "http://localhost:10800/api/v1";
             try {
@@ -464,7 +465,8 @@
                             if (!videoUrl) {
                                 throw new Error('URL is empty');
                             }
-                            videoUrl = videoUrl.replace("{host}", host);
+                            //videoUrl = videoUrl.replace("{host}", host);
+                            videoUrl = videoUrl.replace("{host}", "112.35.23.101");
                             $.cookie("videoUrl", videoUrl);
                             $.cookie("DeviceType", DeviceType);
                             $.cookie("videoImg", $img.attr("src"));
@@ -537,7 +539,8 @@
                 success: function (data) {
                     var ret = JSON.parse(data);
                     var videoUrl = ret.EasyDarwin.Body.URL;
-                    videoUrl = videoUrl.replace("{host}", host);
+                    //videoUrl = videoUrl.replace("{host}", host);
+                    videoUrl = videoUrl.replace("{host}", "112.35.23.101");
                     if (videoUrl == "") {
                         $.gritter.add("当前通道不在线");
                     } else {

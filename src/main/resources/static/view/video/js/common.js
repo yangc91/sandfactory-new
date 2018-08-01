@@ -103,7 +103,7 @@
          return flag;
      }
 
-     var _url = "/api/v1";
+     var _url = "http://112.35.23.101:10800/api/v1";
      try {
          $.ajax({
              type: "GET",
