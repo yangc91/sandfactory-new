@@ -18,6 +18,8 @@ public interface IChengZhongService {
    */
   Pagination<ChengZhongRecord> queryRecordForPage(String startTime, String endTime, ChengZhongRecord chengZhongRecord, Integer pageNo, Integer pageSize);
 
+  Pagination<ChengZhongRecord> queryRecordForPage(String startTime, String endTime, ChengZhongRecord chengZhongRecord, Integer pageNo, Integer pageSize, String searchKey);
+
   ChengZhongRecord getRecord(int id);
 
   boolean add(ChengZhongRecord record);

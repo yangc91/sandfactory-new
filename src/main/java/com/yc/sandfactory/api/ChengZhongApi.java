@@ -34,14 +34,14 @@ public class ChengZhongApi {
   private IChengZhongService chengZhongService;
 
   @RequestMapping(value = "/list")
-  public Object list(String startTime, String endTime, ChengZhongRecord condition, int pageNum, int pageSize)
+  public Object list(String startTime, String endTime, ChengZhongRecord condition, int pageNum, int pageSize, String searchKey)
       throws JsonProcessingException {
     logger.info("调用称重list请求的输入参数：recodRequestBean：{}",
         JsonMapperProvide.alwaysMapper().writeValueAsString(condition)
     );
 
     try {
-      Pagination pagination = chengZhongService.queryRecordForPage(startTime, endTime, condition, pageNum, pageSize);
+      Pagination pagination = chengZhongService.queryRecordForPage(startTime, endTime, condition, pageNum, pageSize, searchKey);
       return ResponseBean.createSuccess(pagination);
     } catch (Exception e) {
       logger.error(e.getMessage(), e);

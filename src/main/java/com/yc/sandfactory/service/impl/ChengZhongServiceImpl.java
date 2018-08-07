@@ -82,6 +82,33 @@ public class ChengZhongServiceImpl implements IChengZhongService {
   }
 
   @Override
+  public Pagination<ChengZhongRecord> queryRecordForPage(String startTime, String endTime,
+      ChengZhongRecord chengZhongRecord, Integer pageNo, Integer pageSize, String searchKey) {
+
+    Pager pager = nutDao.createPager(pageNo, pageSize);
+
+    Criteria cri = Cnd.cri();
+
+    if (StringUtils.isNotEmpty(searchKey)) {
+      cri.where().and(Cnd.exps("xh", "like", '%' + searchKey + '%')
+          .orLike("ch", searchKey)
+          .orLike("hm", searchKey)
+      );
+    }
+
+    cri.getOrderBy().desc("id");
+    List<ChengZhongRecord> list = nutDao.query(ChengZhongRecord.class, cri, pager);
+    int count = nutDao.count(ChengZhongRecord.class, cri);
+
+    Pagination pagination = new Pagination();
+    pagination.setList(list);
+    pagination.setTotal(count);
+
+    return pagination;
+
+  }
+
+  @Override
   public ChengZhongRecord getRecord(int id) {
     return nutDao.fetch(ChengZhongRecord.class, id);
   }
