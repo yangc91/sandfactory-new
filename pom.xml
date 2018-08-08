@@ -109,7 +109,7 @@
             <configuration>
               <excludes>
                 <exclude>*.*</exclude>
-                <exclude>src/main/resources/**</exclude>
+                <!--<exclude>src/main/resources/**</exclude>-->
               </excludes>
             </configuration>
           </execution>
