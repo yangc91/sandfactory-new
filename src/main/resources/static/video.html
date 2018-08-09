@@ -31,7 +31,7 @@
       /*height: auto;*/
       width: 100%;
       height: 100%;
-      background-color: #0C0C0C;
+      /*background-color: #0C0C0C;*/
     }
 
   </style>
@@ -41,14 +41,14 @@
 <body>
 
 <div class="contet">
-  <video id="myPlayer0" poster="">
+  <video id="myPlayer0" poster="" webkit-playsinline="true" playsinline="true" >
     <source src="rtmp://117.158.160.204"
             type="rtmp/flv"/>
   </video>
 </div>
 
 <div class="contet">
-  <video id="myPlayer1" poster="">
+  <video id="myPlayer1" poster="" webkit-playsinline="true" playsinline="true" >
     <source src="rtmp://117.158.160.204"
             type="rtmp/flv"/>
   </video>
@@ -168,13 +168,21 @@
 
   console.log(videoUrls);
 
+  var players = [];
   for (var i = 0; i < videoUrls.length; i++) {
     $("#myPlayer" + i).find("source").attr({"src": videoUrls[i], "type": "rtmp/mp4"});
-  }
-
-  for (var i = 0; i < videoUrls.length; i++) {
     var player = new EZUIPlayer('myPlayer' + i);
-    player.play();
+    players.push(player);
+  }
+  players.reverse();
+  //间隔加载视频，防止一下请求过多
+  for (var i = 0; i < videoUrls.length; i++) {
+    (function() {
+      var j = i;
+      setTimeout( function timer() {
+        players.pop().play();
+      },(j+1)*2500 );
+    })();
   }
 
   nowTimeLive = setInterval(function () {
