@@ -13,7 +13,7 @@ public class TokenConfig {
 	/**
 	 * @Fields expiredTimeInMinutes: 过期时间，单位为分钟
 	 */
-	private long expiredTimeInMinutes = 30;
+	private long expiredTimeInMinutes = 24*60;
 
 	/**
 	 * @Fields autoDelay: 是否自动延期，当获取Token或Token被更新时，自动延期。

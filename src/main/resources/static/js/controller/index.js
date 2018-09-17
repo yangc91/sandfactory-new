@@ -119,4 +119,90 @@ layui.use(['layer','element','laytpl'], function(){
     layer.closeAll("tips");
   }
 
+
+  function openVideo() {
+    alert(1);
+    $.ajax({
+      type: 'GET',
+      url: "/admin/vodeo/getHkToken",
+      ansyc:false,
+      success: function (res) {
+        if(res.flag == 1){
+          console.log(res.result);
+        }
+      }
+    })
+  }
+
+  //点击修改密码，弹出修改密码弹框
+  $(".editPwd").unbind().on('click', function () {
+    $("#editPwdForm .error-item").removeClass("error-item");
+    $("#editPwdForm input.error").removeClass("error");
+    $("#editPwdForm label.error").remove();
+    editPwdForm.reset();
+    layer.open({
+      type: 1,
+      title: "修改密码",
+      content: $('#editPwdSection'),
+      area: '480px'
+    });
+  });
+
+  //定义修改密码校验规则
+  $("#editPwdForm").validate({
+    onfocusout: function (element) {
+      $(element).valid();
+    },
+    rules: {
+      oldPwd: {required: true, notEmpty: true},
+      newPwd: {required: true, notEmpty: true, pwd: true},
+      confirmPwd: {required: true, notEmpty: true, equalTo: "#newPwd"}
+    },
+    messages: {
+      oldPwd: {
+        required: "请输入旧密码",
+        notEmpty: "请输入旧密码"
+      },
+      newPwd: {
+        required: "请输入新密码",
+        //pwd: "密码为6-16位数字、字母、下划线组合",
+        notEmpty: "请输入新密码"
+      },
+      confirmPwd: {
+        required: "请输入确认密码",
+        notEmpty: "请输入确认密码",
+        equalTo: "确认密码与新密码不一致"
+      }
+    },
+    /*错误提示位置*/
+    errorPlacement: function (error, element) {
+      element.parent().addClass("error-item");
+      element.after(error);
+    },
+    success: function (tip) {
+      $(tip).parent().removeClass("error-item");
+      $(tip).remove();
+    },
+    submitHandler: function () {
+      var postData = {
+        oldPwd: $("#oldPwd").val(),
+        newPwd: $("#newPwd").val()
+      };
+      $.ajax({
+        type: 'POST',
+        url: "/admin/sysuser/updatePwd",
+        data: JSON.stringify(postData),
+        success: function (res) {
+          if (res.flag == 1) {
+            layer.closeAll('page');
+            layer.msg('修改密码成功');
+          } else {
+            layer.alert(res.message)
+          }
+        }
+      });
+    }
+  });
+
+
 });

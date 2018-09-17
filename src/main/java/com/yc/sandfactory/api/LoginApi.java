@@ -40,7 +40,6 @@ public class LoginApi extends BaseController {
     SysUser sysUser =
         userService.get(username, DigestUtil.MD5Digest(password, sysCons.getMd5Salt()));
     if (sysUser != null) {
-      //			sysUser.setUsername(null);
       sysUser.setCreateTime(0);
       sysUser.setPassword(null);
 

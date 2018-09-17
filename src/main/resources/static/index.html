@@ -21,8 +21,9 @@
         <!-- <dl class="layui-nav-child">
           <dd><a href="">个人资料</a></dd>
           <dd><a href="">修改密码</a></dd>
-        </dl> -->
+        </dl> --></a>
       </li>
+      <li class="layui-nav-item"><a href="javascript:;" class="editPwd">修改密码</a></li>
       <li class="layui-nav-item"><a href="javascript:;" id="exit">退出</a></li>
     </ul>
   </div>
@@ -43,7 +44,8 @@
           </dl>
         </li>
         <li class="layui-nav-item nav-videoManage">
-          <a href="/video.html" style="display:none" target="_blank">视频监控</a>
+          <!--<a href="/video.html" style="display:none" target="_blank">视频监控</a>-->
+          <a style="display:none" onclick="openVideo()">视频监控</a>
         </li>
         <li class="layui-nav-item">
           <a href="javascript:;" style="display:none">系统管理</a>
@@ -65,7 +67,35 @@
   </div>
 </div>
 
-
+<!--修改密码-->
+<section id="editPwdSection" style="display: none">
+  <form action="" class="layui-form mt20 pr20 mr20" id="editPwdForm">
+    <div class="layui-form-item">
+      <label class="layui-form-label">旧密码:</label>
+      <div class="layui-input-block">
+        <input type="password" name="oldPwd" id="oldPwd" maxlength="32" placeholder="请输入旧密码" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">新密码:</label>
+      <div class="layui-input-block">
+        <input type="password" name="newPwd" id="newPwd" maxlength="32" placeholder="请输入新密码" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">确认密码:</label>
+      <div class="layui-input-block">
+        <input type="password" name="confirmPwd" id="confirmPwd" maxlength="32" placeholder="请输入确认密码" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item mt20">
+      <div class="layui-input-block">
+        <button class="layui-btn">确定</button>
+        <button type="reset" class="layui-btn layui-btn-primary page-cancel">取消</button>
+      </div>
+    </div>
+  </form>
+</section>
 
 <script src="js/lib/jquery.min.js"></script>
 <script src="js/lib/layui/layui.js"></script>
@@ -77,6 +107,129 @@
 <script src="js/lib/echarts-all.js"></script>
 <script src="js/main.js"></script>
 <script src="js/controller/index.js"></script>
+
+<script>
+
+  function openVideo() {
+    $.ajax({
+      type: 'GET', url: "/admin/video/getHkToken", ansyc: false, success: function (res) {
+        if (res.flag == 1) {
+          console.log(res.result.ISMS_8700_CASTGC);
+
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", 'http://127.0.0.1:4320/plugin/execute/vssworkstation', true);
+          //xhr.open("POST", 'http://127.0.0.1:4350/plugin/execute/vssworkstation', true);
+
+          //Send the proper header information along with the request
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+          xhr.onreadystatechange = function() {//Call a function when the state changes.
+            if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+              // Request finished. Do processing here.
+            } else if (this.status != 200) {
+              layer.msg("请先安装插件！！");
+            }
+          }
+          xhr.send(JSON.stringify({
+            "userName":res.result.ivmName,
+            "ISMS_8700_CASTGC": res.result.ISMS_8700_CASTGC,
+            "cmsIP":res.result.ivmIpOut,
+            "cmsPort": res.result.ivmPort,
+            "skinType":"red",
+            "moduleIndex":1
+          }));
+        }
+      }
+    });
+
+//    normalAjax('http://127.0.0.1:4320/plugin/execute/vssworkstation',{
+//      "userName":"admin",
+//      "ISMS_8700_CASTGC":"1231233",
+//      "cmsIP":"120.194.171.198",
+//      "cmsPort":8900,
+//      "skinType":"red",
+//      "moduleIndex":1
+//    }, null);
+
+
+//    $.ajax({
+//      type: 'GET',
+//      url: "/admin/video/getHkToken",
+//      ansyc:false,
+//      success: function (res) {
+//        if(res.flag == 1){
+//          console.log(res.result.ISMS_8700_CASTGC);
+//          normalAjax('http://127.0.0.1:4320/plugin/execute/vssworkstation',{
+//            "userName":"admin",
+//            "ISMS_8700_CASTGC":res.result.ISMS_8700_CASTGC,
+//            "cmsIP":"120.194.171.198",
+//            "cmsPort":8900,
+//            "skinType":"red",
+//            "moduleIndex":1
+//          }, null);
+//
+////          $.ajax({
+////            //url: "/admin/videoview/view",
+////            url: 'http://127.0.0.1:4320/plugin/execute/vssworkstation',
+////            type: 'post',
+////            data: JSON.stringify({
+////              "userName":"admin",
+////              "ISMS_8700_CASTGC":res.result.ISMS_8700_CASTGC,
+////              "cmsIP":"120.194.171.198",
+////              "cmsPort":8900,
+////              "skinType":"red",
+////              "moduleIndex":1
+////            }),
+////            success: function(data) {
+////              console.log(data);
+////            }
+////          });
+//
+//        }
+//      }
+//    })
+  }
+
+   function normalAjax(url,data,callback,obj,returnObj) {  //isReturnObj:用于退卡时,需要退卡和所刷卡号对比
+    var _this = this,cardTypeData = data;
+    $.ajax({
+      type: "post",
+      //contentType: "application/json; charset=utf-8",
+      //dataType: "json",
+      url: url,
+      data:data,
+      success: function(data) {
+        if(obj){
+          //读卡通用
+          if(data.data != ""  && JSON.parse(data.data).number != ''){
+            if(JSON.parse(cardTypeData).readertype == 5){
+              //ie下,蓝牙读卡器读取到初始数据后会输入到文本框中,需等待输入完毕后再替换成转换后的数据;否则存在原始数据未输入完毕,替换后的数据已经开始输入了,导致最后读取到的卡号会多出一到两位(多出的为蓝牙读卡器读到的初始数据);
+              setTimeout(function(){
+                $(obj).val(JSON.parse(data.data).number);
+              },100);
+            }
+            else{
+              $(obj).val(JSON.parse(data.data).number);
+              if(returnObj && returnObj.returnCard){//适合退卡
+                return returnObj.returnFun(JSON.parse(data.data).number,returnObj.returnNum,returnObj.returnType);
+              }
+            }
+          }
+        }else if(callback) {
+          //返回数据调用会掉函数处理界面
+          return callback(data);
+        }else{
+          //关闭有界面时候用
+          return;
+        }
+      },
+      error:function(XMLHttpRequest, textStatus, errorThrown){
+        _this.installHttpServer();
+      }
+    })
+  };
+
+</script>
 
 </body>
 </html>

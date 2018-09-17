@@ -31,7 +31,7 @@ public class SysUserApi {
   @Autowired
   private SysCons sysCons;
 
-  @RequestMapping(value = "updatePwd", method = RequestMethod.GET)
+  @RequestMapping(value = "updatePwd")
   public ResponseBean updatePwd(@RequestBody JSONObject params) {
     try {
 
@@ -43,7 +43,7 @@ public class SysUserApi {
 
       // 验证旧密码是否存在
       SysUser sysUser =
-          userService.get(user.getName(), DigestUtil.MD5Digest(oldpwd, sysCons.getMd5Salt()));
+          userService.get(user.getUsername(), DigestUtil.MD5Digest(oldpwd, sysCons.getMd5Salt()));
       if (sysUser == null) {
         return ResponseBean.createError("原密码错误");
       }

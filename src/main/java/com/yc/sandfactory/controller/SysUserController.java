@@ -1,5 +1,6 @@
 package com.yc.sandfactory.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yc.sandfactory.bean.Pagination;
 import com.yc.sandfactory.bean.ResponseBean;
 import com.yc.sandfactory.config.SysCons;
@@ -9,6 +10,7 @@ import com.yc.sandfactory.service.ISysUserService;
 import com.yc.sandfactory.service.ISystemLogService;
 import com.yc.sandfactory.util.Constants;
 import com.yc.sandfactory.util.DigestUtil;
+import com.yc.sandfactory.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -135,6 +137,28 @@ public class SysUserController extends BaseController {
         try {
             service.edit(user);
             systemLogService.addLog(Constants.ENUM_LOG_TYPE.userManagerLog, "编辑【"+user.getUsername()+"】成功");
+            return ResponseBean.SUCCESS;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return ResponseBean.FAIL;
+    }
+
+    @RequestMapping(value = "updatePwd")
+    public ResponseBean updatePwd(@RequestBody JSONObject params) {
+        try {
+            String oldpwd = params.getString("oldPwd");
+            String newPwd = params.getString("newPwd");
+            // 获取当前登录人信息
+            SysUser user = UserUtil.currentUser();
+            // 验证旧密码是否存在
+            SysUser sysUser =
+                service.get(user.getUsername(), DigestUtil.MD5Digest(oldpwd, sysCons.getMd5Salt()));
+            if (sysUser == null) {
+                return ResponseBean.createError("原密码错误");
+            }
+            //更新新密码
+            service.changePwd(sysUser.getId(), DigestUtil.MD5Digest(newPwd, sysCons.getMd5Salt()));
             return ResponseBean.SUCCESS;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
