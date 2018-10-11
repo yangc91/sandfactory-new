@@ -69,7 +69,7 @@ public class ChengZhongApi {
     return record;
   }
 
-  @RequestMapping(value = "/count")
+  @RequestMapping(value = "/todayCount")
   public Object count() {
     logger.info("调用称重统计接口");
     try {
@@ -88,33 +88,8 @@ public class ChengZhongApi {
       Integer todayNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime);
       Float todayWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime);
 
-      //月统计
-      List<MonthCountBean> monthLis = new ArrayList<>();
-      for (int i = 0; i <= 12; i++) {
-        String startTime = DateTimeUtil.dateToStr(now.getTime(), "yyyy-MM") + "-01 00:00:00";
-        MonthCountBean monthCountBean = new MonthCountBean();
-        monthCountBean.setMonth(startTime);
-        monthCountBean.setWeight(0f);
-        monthLis.add(monthCountBean);
-
-        now.add(Calendar.MONTH, -1);
-      }
-
-      String bengin = null;
-      String end = null;
-      for (int i = 12; i > 0; i--) {
-        bengin = monthLis.get(i).getMonth();
-        end = monthLis.get(i - 1).getMonth();
-        Float monthWeight = chengZhongService.countRecordWeight(bengin, end);
-        monthLis.get(i).setWeight(monthWeight);
-        monthLis.get(i).setMonth(bengin.substring(0, bengin.length() - 12));
-      }
-
-      monthLis.remove(0);
-
       result.put("todayNo", todayNo);
       result.put("todayWeight", todayWeight);
-      result.put("monthList", monthLis);
 
       return ResponseBean.createSuccess(result);
     } catch (Exception e) {

@@ -78,7 +78,7 @@ public class ChengZhongController {
       //获取当前年月份的应用情况
       Calendar now = Calendar.getInstance();
       now.setTime(new Date());
-      now.add(Calendar.MONTH, 1);
+
 
       //日统计
       String dateStr = DateTimeUtil.dateToStr(now.getTime(), "yyyy-MM-dd");
@@ -88,6 +88,7 @@ public class ChengZhongController {
       Integer todayNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime);
       Float todayWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime);
 
+      now.add(Calendar.MONTH, 1);
       //月统计
       List<MonthCountBean> monthLis = new ArrayList<>();
       for (int i = 0; i <= 12; i++) {
