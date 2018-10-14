@@ -84,11 +84,25 @@ public class ChengZhongApi {
       String todayStartTime = dateStr + " 00:00:00";
       String todayEndTime = dateStr + " 23:59:59";
 
-      Integer todayNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime);
-      Float todayWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime);
+      Integer todayNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, null);
+      Float todayWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime, null);
 
       result.put("todayNo", todayNo);
       result.put("todayWeight", todayWeight);
+
+      //河沙
+      Integer hshaNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, "河沙");
+      Float hshaWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime, "河沙");
+
+      result.put("hshaNo", hshaNo);
+      result.put("hshaWeight", hshaWeight);
+
+      // 河石
+      Integer hshiNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, "河石");
+      Float hshiWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime, "河石");
+
+      result.put("hshiNo", hshiNo);
+      result.put("hshiWeight", hshiWeight);
 
       return ResponseBean.createSuccess(result);
     } catch (Exception e) {

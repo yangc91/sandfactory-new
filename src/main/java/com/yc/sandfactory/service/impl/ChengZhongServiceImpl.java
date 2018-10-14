@@ -3,11 +3,16 @@ package com.yc.sandfactory.service.impl;
 import com.yc.sandfactory.bean.Pagination;
 import com.yc.sandfactory.entity.ChengZhongRecord;
 import com.yc.sandfactory.service.IChengZhongService;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.nutz.dao.Cnd;
+import org.nutz.dao.Sqls;
 import org.nutz.dao.impl.NutDao;
 import org.nutz.dao.pager.Pager;
 import org.nutz.dao.sql.Criteria;
+import org.nutz.dao.sql.Sql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -120,7 +125,7 @@ public class ChengZhongServiceImpl implements IChengZhongService {
   }
 
   @Override
-  public Integer countRecordNo(String startTime, String endTime) {
+  public Integer countRecordNo(String startTime, String endTime, String hm) {
     Criteria cri = Cnd.cri();
 
     if(StringUtils.isNotBlank(startTime)) {
@@ -132,36 +137,47 @@ public class ChengZhongServiceImpl implements IChengZhongService {
       cri.where().and("mzsj", "<", endTime );
     }
 
+    if (StringUtils.isNotBlank(hm)) {
+      cri.where().and("hm", "=", hm );
+    }
+
     int count = nutDao.count(ChengZhongRecord.class, cri);
 
     return count;
   }
 
   @Override
-  public Float countRecordWeight(String startTime, String endTime) {
+  public Float countRecordWeight(String startTime, String endTime, String hm) {
 
-    float weight = 0f;
-    Criteria cri = Cnd.cri();
+    StringBuilder sqlSb = new StringBuilder(" SELECT sum(n_jz) from t_cz_record where 1=1 ");
+
+    Map<String, Object> map = new HashMap<>();
 
     if(StringUtils.isNotBlank(startTime)) {
-      // 更新时间
-      cri.where().and("mzsj", ">=", startTime);
+      sqlSb.append(" AND c_mzsj > @startTime ");
+      map.put("startTime", startTime);
     }
 
     if (StringUtils.isNotBlank(endTime)) {
-      cri.where().and("mzsj", "<", endTime);
+      sqlSb.append(" AND c_mzsj < @endTime ");
+      map.put("endTime", endTime);
     }
 
-    List<ChengZhongRecord> list = nutDao.query(ChengZhongRecord.class, cri);
-
-    if (list.isEmpty()) {
-      return weight;
+    if (StringUtils.isNotBlank(hm)) {
+      sqlSb.append(" AND c_hm = @hm ");
+      map.put("hm", hm);
     }
 
-    for (ChengZhongRecord record : list) {
-      weight += record.getJz();
-    }
+    Sql sql =Sqls.create(sqlSb.toString());
+    sql.params().putAll(map);
 
+    sql.setCallback(Sqls.callback.floatValue());
+
+    nutDao.execute(sql);
+    float weight = sql.getFloat();
+
+    DecimalFormat df = new DecimalFormat("0.00");
+    weight = Float.valueOf(df.format(weight));
     return weight;
   }
 }

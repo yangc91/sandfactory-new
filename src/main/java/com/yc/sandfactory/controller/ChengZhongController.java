@@ -85,8 +85,25 @@ public class ChengZhongController {
       String todayStartTime = dateStr + " 00:00:00";
       String todayEndTime = dateStr + " 23:59:59";
 
-      Integer todayNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime);
-      Float todayWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime);
+      Integer todayNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, null);
+      Float todayWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime,null);
+
+      result.put("todayNo", todayNo);
+      result.put("todayWeight", todayWeight);
+
+      //河沙
+      Integer hshaNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, "河沙");
+      Float hshaWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime, "河沙");
+
+      result.put("hshaNo", hshaNo);
+      result.put("hshaWeight", hshaWeight);
+
+      // 河石
+      Integer hshiNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, "河石");
+      Float hshiWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime, "河石");
+
+      result.put("hshiNo", hshiNo);
+      result.put("hshiWeight", hshiWeight);
 
       now.add(Calendar.MONTH, 1);
       //月统计
@@ -106,15 +123,14 @@ public class ChengZhongController {
       for (int i = 12; i > 0; i--) {
         bengin = monthLis.get(i).getMonth();
         end = monthLis.get(i - 1).getMonth();
-        Float monthWeight = chengZhongService.countRecordWeight(bengin, end);
+        Float monthWeight = chengZhongService.countRecordWeight(bengin, end, null);
         monthLis.get(i).setWeight(monthWeight);
         monthLis.get(i).setMonth(bengin.substring(0, bengin.length() - 12));
       }
 
       monthLis.remove(0);
 
-      result.put("todayNo", todayNo);
-      result.put("todayWeight", todayWeight);
+
       result.put("monthList", monthLis);
 
       return ResponseBean.createSuccess(result);

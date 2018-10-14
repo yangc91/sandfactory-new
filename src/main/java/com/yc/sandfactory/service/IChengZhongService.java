@@ -30,7 +30,7 @@ public interface IChengZhongService {
    * @param endTime
    * @return
    */
-  Integer countRecordNo(String startTime, String endTime);
+  Integer countRecordNo(String startTime, String endTime, String hm);
 
   /**
    * 统计一段时间内的总重量（实重）
@@ -38,6 +38,6 @@ public interface IChengZhongService {
    * @param endTime
    * @return
    */
-  Float countRecordWeight(String startTime, String endTime);
+  Float countRecordWeight(String startTime, String endTime, String hm);
 
 }
