@@ -149,7 +149,7 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
     };
 
     $("#searchBtn").click(function () {
-        dataObj.search.startTime = $("#endTime").val();
+        dataObj.search.startTime = $("#startTime").val();
         dataObj.search.endTime = $("#endTime").val();
         dataObj.search.xh = $("#xh").val();
         dataObj.search.ch = $("#ch").val();

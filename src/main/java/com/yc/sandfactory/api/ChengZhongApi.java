@@ -78,7 +78,6 @@ public class ChengZhongApi {
       //获取当前年月份的应用情况
       Calendar now = Calendar.getInstance();
       now.setTime(new Date());
-      now.add(Calendar.MONTH, 1);
 
       //日统计
       String dateStr = DateTimeUtil.dateToStr(now.getTime(), "yyyy-MM-dd");

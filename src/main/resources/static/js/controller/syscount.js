@@ -8,7 +8,7 @@ var chart = echarts.init(document.getElementById('eChart'));
 var option = {
   tooltip: {
     trigger: 'axis',
-    formatter: '重量：{c0}KG',
+    formatter: '重量：{c0}kg',
     axisPointer: {
       type: 'line',
       lineStyle: {
@@ -125,8 +125,8 @@ $(document).ready(function () {
         type: 'GET', url: "/admin/record/count", success: function (res) {
           if (res.flag == 1) {
             var result = res.result;
-            $("#appTotal").html(result.todayNo + "量");
-            $("#appCallInterfaceTotal").html(result.todayWeight + "KG");
+            $("#appTotal").html(result.todayNo + "辆");
+            $("#appCallInterfaceTotal").html(result.todayWeight + "kg");
             option.series[0].data = [];
             if (result.monthList) {
               for (var i = 0; i < result.monthList.length; i++) {
