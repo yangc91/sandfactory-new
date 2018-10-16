@@ -178,7 +178,7 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
     function exportData() {
 
         var url = '/admin/public/export' + '?startTime='+dataObj.search.startTime
-            + "&endTime="+dataObj.search.startTime
+            + "&endTime="+dataObj.search.endTime
             + "&xh="+dataObj.search.xh
             + "&crlx="+dataObj.search.crlx
             ;
@@ -216,7 +216,7 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
                     var startTime = dataObj.search.startTime;
                     var endTime = dataObj.search.endTime;
 
-                    var filename;
+                    var filename = '';
                     if (startTime) {
                         filename = startTime;
                     }
@@ -224,7 +224,12 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
                     if (endTime) {
                         filename = filename + "_" + endTime;
                     }
-                    filename += "-称重数据.xls";
+
+                    if (filename == '') {
+                        filename = "称重数据.xls"
+                    } else {
+                        filename += "-称重数据.xls";
+                    }
 
                     a.download = filename;
 
