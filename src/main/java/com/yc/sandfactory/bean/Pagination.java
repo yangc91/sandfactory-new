@@ -16,7 +16,7 @@ public class Pagination<T> {
 		this.total = total;
 	}
 
-	public List<?> getList() {
+	public List<T> getList() {
 		return list;
 	}
 
