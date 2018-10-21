@@ -125,8 +125,13 @@ $(document).ready(function () {
         type: 'GET', url: "/admin/record/count", success: function (res) {
           if (res.flag == 1) {
             var result = res.result;
-            $("#appTotal").html(result.todayNo + "辆");
-            $("#appCallInterfaceTotal").html(result.todayWeight + "kg");
+            $("#appTotal").html(result.todayNo + " 辆");
+            $("#hshaNo").html(result.hshaNo + " 辆");
+            $("#hshiNo").html(result.hshiNo + " 辆");
+
+            $("#appCallInterfaceTotal").html(result.todayWeight + " T");
+            $("#hshaWeight").html(result.hshaWeight + " T");
+            $("#hshiWeight").html(result.hshiWeight + " T");
             option.series[0].data = [];
             if (result.monthList) {
               for (var i = 0; i < result.monthList.length; i++) {
