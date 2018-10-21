@@ -58,6 +58,11 @@
     .index .chart #eChart {
       height: 350px;
     }
+
+    .nice {
+      font-weight: bold;
+      color: #0c0c0c !important;
+    }
   </style>
   <header class="title">
     <h1>今日统计</h1>
@@ -65,17 +70,17 @@
   <div class="index content">
     <section class="count">
       <div class="sqs">
-        <label>总车数 </label><strong id="appTotal"></strong><br>
-        <label>河&nbsp;&nbsp;&nbsp;沙 </label><strong id="hshaNo"></strong><br>
-        <label>砂&nbsp;&nbsp;&nbsp;石 </label><strong id="hshiNo"></strong>
+        <label>总车数 ：</label><label id="appTotal" class="nice"></label><br>
+        <label>河&nbsp;&nbsp;&nbsp;沙 ：</label><label id="hshaNo" class="nice"></label><br>
+        <label>砂&nbsp;&nbsp;&nbsp;石 ：</label><label id="hshiNo" class="nice"></label>
         <!--<p id="appTotal">0辆</p>-->
       </div>
       <div class="jksy">
         <!--<label>今日称重</label><p id="appCallInterfaceTotal">0kg</p>-->
 
-        <label>总重量 </label><strong id="appCallInterfaceTotal"></strong><br>
-        <label>河&nbsp;&nbsp;&nbsp;沙 </label><strong id="hshaWeight"></strong><br>
-        <label>砂&nbsp;&nbsp;&nbsp;石 </label><strong id="hshiWeight"></strong>
+        <label>总重量 ：</label><label id="appCallInterfaceTotal" class="nice"></label><br>
+        <label>河&nbsp;&nbsp;&nbsp;沙 ：</label><label id="hshaWeight" class="nice"></label><br>
+        <label>砂&nbsp;&nbsp;&nbsp;石 ：</label><label id="hshiWeight" class="nice"></label>
       </div>
     </section>
     <!--<section class="quick-menu">-->
