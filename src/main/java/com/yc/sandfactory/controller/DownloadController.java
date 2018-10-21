@@ -110,10 +110,29 @@ public class DownloadController extends BaseController {
     headCell.setCellValue("日期");
     headCell.setCellStyle(cellStyle);
 
+    // 统计数据
+    int totalNo = list.size();
+    float totalWeight = 0;
+    // 河沙
+    int hshaNo = 0;
+    float hshaWeight = 0;
+    // 砂石
+    int sshiNo = 0;
+    float sshiWeight = 0;
+
     // 添加数据内容
     for (int i = 0; i < list.size(); i++) {
-      hssfRow = sheet.createRow((int) i + 1);
+      hssfRow = sheet.createRow(i + 1);
       ChengZhongRecord record = list.get(i);
+
+      if("河沙".equals(record.getHm())) {
+        hshaNo++;
+        hshaWeight += record.getJz();
+      } else {
+        sshiNo++;
+        sshiWeight += record.getJz();
+      }
+      totalWeight += record.getJz();
 
       // 创建单元格，并设置值
       HSSFCell cell = hssfRow.createCell(0);
@@ -152,6 +171,67 @@ public class DownloadController extends BaseController {
       cell.setCellValue(record.getMzsj());
       cell.setCellStyle(cellStyle);
     }
+
+    /**
+     *    --- | 车数 | 重量
+     *    总数|
+     *    河沙|
+     *    砂石|
+     */
+    // 车辆数据
+    hssfRow = sheet.createRow(list.size() + 3);
+    // 创建单元格，并设置值
+    HSSFCell headCell2 = hssfRow.createCell(1);
+    headCell2.setCellValue("车数");
+    headCell2.setCellStyle(cellStyle);
+
+    HSSFCell headCell3 = hssfRow.createCell(2);
+    headCell3.setCellValue("重量");
+    headCell3.setCellStyle(cellStyle);
+
+    hssfRow = sheet.createRow(list.size() + 4);
+    // 创建单元格，并设置值
+    HSSFCell totalCell = hssfRow.createCell(0);
+    totalCell.setCellValue("总数");
+    totalCell.setCellStyle(cellStyle);
+
+    HSSFCell totalCell2 = hssfRow.createCell(1);
+    totalCell2.setCellValue(totalNo + "量");
+    totalCell2.setCellStyle(cellStyle);
+
+    HSSFCell totalCell3 = hssfRow.createCell(2);
+    totalCell3.setCellValue(folatTo2Str(totalWeight) + "t");
+    totalCell3.setCellStyle(cellStyle);
+
+    // 河沙
+    hssfRow = sheet.createRow(list.size() + 5);
+    // 创建单元格，并设置值
+    HSSFCell hshaCell = hssfRow.createCell(0);
+    hshaCell.setCellValue("河沙");
+    hshaCell.setCellStyle(cellStyle);
+
+    HSSFCell weightHeadCell2 = hssfRow.createCell(1);
+    weightHeadCell2.setCellValue(hshaNo + "量");
+    weightHeadCell2.setCellStyle(cellStyle);
+
+    HSSFCell weightHeadCell3 = hssfRow.createCell(2);
+    weightHeadCell3.setCellValue(folatTo2Str(hshaWeight) + "t");
+    weightHeadCell3.setCellStyle(cellStyle);
+
+    // 砂石
+    hssfRow = sheet.createRow(list.size() + 6);
+    // 创建单元格，并设置值
+    HSSFCell sshiCell = hssfRow.createCell(0);
+    sshiCell.setCellValue("砂石");
+    sshiCell.setCellStyle(cellStyle);
+
+    HSSFCell sshiCell2 = hssfRow.createCell(1);
+    sshiCell2.setCellValue(sshiNo + "量");
+    sshiCell2.setCellStyle(cellStyle);
+
+    HSSFCell sshiCell3 = hssfRow.createCell(2);
+    sshiCell3.setCellValue(folatTo2Str(sshiWeight) + "t");
+    sshiCell3.setCellStyle(cellStyle);
 
     // 保存Excel文件
     try {

@@ -9,6 +9,7 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
         },
         search: {
             startTime:"",
+            sandName: "",
             endTime:"",
             xh:"",
             ch:"",
@@ -51,6 +52,7 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
                 ch:dataObj.search.ch,
                 sh:dataObj.search.sh,
                 fh:dataObj.search.fh,
+                sandName:dataObj.search.sandName,
                 crlx:dataObj.search.crlx
             },
             success: function (res) {
@@ -156,6 +158,7 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
         dataObj.search.sh = $("#sh").val();
         dataObj.search.fh = $("#fh").val();
         dataObj.search.crlx = $("#crlx").val();
+        dataObj.search.sandName = $("#sandName").val();
         goPage(1,function(){
             //给操作按钮绑定事件
             bindHandleBar();
@@ -172,6 +175,7 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
         dataObj.search.sh = $("#sh").val();
         dataObj.search.fh = $("#fh").val();
         dataObj.search.crlx = $("#crlx").val();
+        dataObj.search.sandName = $("#sandName").val();
         exportData();
     });
 
@@ -180,7 +184,8 @@ layui.use(['form', 'table', 'laydate', 'laytpl' ,'laypage'], function () {
         var url = '/admin/public/export' + '?startTime='+dataObj.search.startTime
             + "&endTime="+dataObj.search.endTime
             + "&xh="+dataObj.search.xh
-            + "&crlx="+dataObj.search.crlx
+            //+ "&crlx="+dataObj.search.crlx
+            + "&sandName="+dataObj.search.sandName
             ;
 
         var xhr = new XMLHttpRequest();

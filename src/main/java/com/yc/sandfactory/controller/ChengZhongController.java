@@ -98,9 +98,9 @@ public class ChengZhongController {
       result.put("hshaNo", hshaNo);
       result.put("hshaWeight", hshaWeight);
 
-      // 河石
-      Integer hshiNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, "河石");
-      Float hshiWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime, "河石");
+      // 砂石
+      Integer hshiNo = chengZhongService.countRecordNo(todayStartTime, todayEndTime, "砂石");
+      Float hshiWeight = chengZhongService.countRecordWeight(todayStartTime, todayEndTime, "砂石");
 
       result.put("hshiNo", hshiNo);
       result.put("hshiWeight", hshiWeight);

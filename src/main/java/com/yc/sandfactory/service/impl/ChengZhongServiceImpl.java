@@ -45,6 +45,11 @@ public class ChengZhongServiceImpl implements IChengZhongService {
       cri.where().and("mzsj", "<", endTime + " 23:59:59");
     }
 
+    // 沙场名称
+    if (StringUtils.isNotBlank(chengZhongRecord.getSandName())) {
+      cri.where().and("sandName", "like", "%"+chengZhongRecord.getSandName()+"%");
+    }
+
     // 序号
     if (StringUtils.isNotBlank(chengZhongRecord.getXh())) {
       cri.where().and("xh", "like", "%"+chengZhongRecord.getXh()+"%");
